@@ -12,6 +12,7 @@ Text2Cypher agent의 사용이유
 가장 성능이 좋은 반복 및 평가 구조를 심층적으로 분석함.
 
 # **Naive Text2Cypher Flow**
+<img width="642" height="299" alt="image" src="https://github.com/user-attachments/assets/eb972173-3b2d-4afd-bd47-ee2819d1ac6a" />
 
 3가지 Step으로 생성됨
 
@@ -23,12 +24,14 @@ Text2Cypher agent의 사용이유
 2. DB결과를 LLM으로 처리해서 답변함
 
 # **Naive Text2Cypher With Retry Flow**
+<img width="733" height="318" alt="image" src="https://github.com/user-attachments/assets/7b96b62f-b292-422c-a472-ae876570fe04" />
 
 self-correction 메커니즘을 추가하여 retry를 할 수 있도록 함.
 
 Cypher query실행이 실패 했을 때, CorrectChpherEventstep에서 에러 정보를 LLM에 주어 Cypher을 고치도록 함
 
 # **Naive Text2Cypher With Retry and Evaluation Flow**
+<img width="788" height="352" alt="image" src="https://github.com/user-attachments/assets/c27133ed-181e-4c40-ab13-331afeb8d978" />
 
 evaluation 단계를 추가하며, 이 과정은 GraphDB 검색 결과가 사용자의 질문 답변에 충분히 답할 수 있는지 확인
 
@@ -313,21 +316,34 @@ def get_naive_final_answer_prompt():
 **질문:** “해리포터 주인공이 나오는 로멘스 영화를 알려줘”
 
 1. **“generate_cypher + excute_query” 과정**
+<img width="1136" height="171" alt="image" src="https://github.com/user-attachments/assets/c6e96561-6df9-4f14-8efc-7b5e588c215e" />
+
 2. **“evaluate_context” 과정 실패**
+<img width="1989" height="352" alt="image" src="https://github.com/user-attachments/assets/3c5cd68b-bf7c-4389-963d-a7cc41d633e8" />
+
 3. **“generate_cypher + excute_query” 과정 재시작**
 
 2번 에러 결과를 반영하여 재생성
+<img width="1760" height="162" alt="image" src="https://github.com/user-attachments/assets/f0f63001-f192-42a1-9c69-7d6c63bd030d" />
 
-1. **“evaluate_context” 과정 실패**
-2. **“generate_cypher + excute_query” 과정 재시작**
+
+4. **“evaluate_context” 과정 실패**
+<img width="2014" height="293" alt="image" src="https://github.com/user-attachments/assets/8bebcc5d-28c9-4bb6-9146-516f934faaa8" />
+
+
+5. **“generate_cypher + excute_query” 과정 재시작**
 
 4번 에러 결과를 반영하여 재생성
+<img width="1443" height="178" alt="image" src="https://github.com/user-attachments/assets/85b675b1-e89e-447d-a0ac-0e5aaeb681cb" />
 
-1. **“evaluate_context” 과정 성공**
+
+6. **“evaluate_context” 과정 성공**
 
 사용자 질문을 GraphDB 검색 결과로 충분하다고 평가하여, LLM이 답변으로 “OK”만 출력된 경우
 
-1. **최종답변**
+7. **최종답변**
+<img width="1975" height="68" alt="image" src="https://github.com/user-attachments/assets/b0b9fe02-2920-4318-b4ae-f985bafee9a0" />
+
 
 ## **예시2**
 
@@ -338,19 +354,29 @@ def get_naive_final_answer_prompt():
 **질문:** 무슨 치킨이 있어?
 
 1. **“generate_cypher + excute_query” 과정 실패**
+<img width="1240" height="135" alt="image" src="https://github.com/user-attachments/assets/1ab026ee-e51d-4a45-b841-36c2e9b119f7" />
+
+
 2. **excute_query**의 **CorrectCypherEvent** 이벤트 과정
 
 올바른 Cypher을 생성 할 수 없다고 답변
+<img width="1253" height="476" alt="image" src="https://github.com/user-attachments/assets/ba40bc06-31be-4787-b625-b87889edd87e" />
 
-1. **반복 횟수 만큼 시도하더라도 Cypher을 생성 불가**
+
+3. **반복 횟수 만큼 시도하더라도 Cypher을 생성 불가**
 
 excute_query에서 DB안의 정보들을 메시지로 출력
+<img width="1254" height="619" alt="image" src="https://github.com/user-attachments/assets/760243b6-1f04-4bf2-8673-6e12855f01c0" />
 
-1. **evaluate_context 과정 건너띔**
+
+4. **evaluate_context 과정 건너띔**
 
 반복 횟수가 남지 않아 최종 답변 과정으로 이동
 
-1. **최종 답변**
+5. **최종 답변**
+<img width="1248" height="163" alt="image" src="https://github.com/user-attachments/assets/314df72a-84d0-4b7a-a9c5-5e09ccb45089" />
+
+
 
 [여기서 실행가능](https://text2cypher-llama-agent.up.railway.app/)
 
@@ -370,11 +396,42 @@ excute_query에서 DB안의 정보들을 메시지로 출력
     
 
 result
+<img width="783" height="223" alt="image" src="https://github.com/user-attachments/assets/0f0a4817-5067-47df-9ea8-dec870ce26de" />
+
 
 retry와 evaluation이 정답 연관도를 높히는 역할을 함.
+
+# QA
+Question:
+
+실제 제품에 적용하기에는 아래와 같은 2가지 문제를 해결해야할 것 같네요.
+문제 설정: 다양한 질문에 대응 가능하려면 vector DB에 충분히 많은 Cypher가 있어야함
+
+1. 후보 Cypher를 어떻게 생성할 것인가?
+2. 충분히 많은 Cypher가 있다고해서 유저의 모든 쿼리를 대응할 수 있나?
+
+Answer:
+
+아래 답변은  Naive Text2Cypher With Retry and Evaluation Flow 구조 입니다.
+
+후보 Cypher를 어떻게 생성할 것인가?
+
+후보 Cypher는 사용자들에 의해 자동적으로 생성됩니다.
+Evaluation Flow의summarize_answer Step에서 최종 생성된 Cypher와 자연어 질의가 지속적으로 저장됩니다. 따라서 다양한 질문에 대한 Cypher을 장기적으로 구축할 수 있다 생각합니다.
+
+충분히 많은 Cypher가 있다고해서 유저의 모든 쿼리를 대응할 수 있나?
+
+모든 쿼리를 한번에 대응하기 힘들 것 같습니다.
+그렇기에 LLM이 평가한 아래 두가지 경우에 에러를 내보내어 질문 수정을 요청합니다.
+1. 사용자 질문과 매칭하는 정보가 DB에 없는 경우 
+2. DB에서 검색된 정보가 사용자 질문과 무관 할 때
+
+위와 같은 방식으로 수정을 요청하여 대응 가능합니다. 
+이후 수정된 질문으로 생성된 Cypher와 자연어 질의를 DB에 저장하여, 추후 few-shot으로 사용하여 더 강건하게 대응 가능합니다.
 
 # **Reference**
 
 https://neo4j.com/blog/developer/knowledge-graph-agents-llamaindex/
 
 [GitHub - tomasonjo-labs/text2cypher_llama_agent: A collection of LlamaIndex Workflows-powered agents that convert natural language to Cypher queries designed to retrieve information from a Neo4j database to answer the question with included benchmark data.](https://github.com/tomasonjo-labs/text2cypher_llama_agent?tab=readme-ov-file)
+
