@@ -23,7 +23,7 @@ LLM + GNN 통합 연구는 주로
     - Soft prompting 기반 파인튜닝으로 성능 향상
 3. **핵심 기술**
 - 환각 방지
-
+<img width="958" height="567" alt="image" src="https://github.com/user-attachments/assets/40b2cb13-e0a2-49da-ac03-74d3244604f3" />
 
     - baseline의 경우 User의 모든 그래프 정보를 다 넣고 답변을 하도록함 → 할루시네이션 발생
     - G-Retriever의 경우 RAG방식으로 필요한 정보만을 검색해와 답변을 함 → 할루시네이션 감소
@@ -40,11 +40,15 @@ LLM + GNN 통합 연구는 주로
 Textual Graphs란?
 
 노드와 엣지가 텍스트 속성을 가지는 그래프
+<img width="588" height="88" alt="image" src="https://github.com/user-attachments/assets/91fc3826-bbf1-4c3c-bb70-ba8289e9fe0d" />
 
 
 x_n: 노드에 있는 텍스트 속성
 
 x_e: 엣지에 있는 텍스트 속성
+
+<img width="900" height="248" alt="image" src="https://github.com/user-attachments/assets/1ab6a3f3-e14c-4670-b013-da9a1fd14f39" />
+
 
 D: vocabulary
 
@@ -52,11 +56,19 @@ L_n, L_e : 텍스트의 길이
 
 e.g.Textual Graph
 
+<img width="435" height="158" alt="image" src="https://github.com/user-attachments/assets/77c3a98f-788b-4c08-97d0-a188b01ccf3b" />
+
+
+
+
 ## **LMs for Text Encoding**
 
 LMs의 사용:
 
 노드와 엣지 text 속성을 인코딩하기 위한 용도
+
+<img width="410" height="58" alt="image" src="https://github.com/user-attachments/assets/8cf79a2a-841b-4e01-93e8-4c7bc5e1515f" />
+
 
 x_n: 노드의 텍스트 속성
 
@@ -71,6 +83,11 @@ z_n: LM으로 x_n을 encode 인코딩하여 d 차원의 output vector
 LLM을 finetuning 없이 특정 작업에 적응시키는 방법
 
 Prompt(embedding) + Input sequence(embedding) → generated output y
+
+<img width="1314" height="353" alt="image" src="https://github.com/user-attachments/assets/07aecac4-ccf2-41d9-a88b-304c9444e1d7" />
+
+<img width="770" height="142" alt="image" src="https://github.com/user-attachments/assets/742b1519-b5f0-4db9-8d9d-d0f05fc516cc" />
+
 
 P: Prompt
 
@@ -89,15 +106,26 @@ X = ["I", "love", "pizza"]
 - 토큰 개수 3인 경우 가정,
 - 각 토큰은 LLM임베딩 레이어를 통해 임베딩 차원 d_l = 4짜리 벡터로 바꿈
 
+<img width="636" height="162" alt="image" src="https://github.com/user-attachments/assets/9c39cfa7-eeaa-4c55-b327-346994686459" />
+
+
 **Step2. SoftPrompting**
 
 프롬프트 길이를 q=2인 경우 가정,
 
 프롬프트 파라미터는 GNN인코더를 통해 임베딩으로 변환
 
+<img width="192" height="50" alt="image" src="https://github.com/user-attachments/assets/971a5ccf-8c21-4a50-9bd5-f87677bc4349" />
+
+<img width="480" height="122" alt="image" src="https://github.com/user-attachments/assets/38185a85-a576-4e1a-8eb1-d394d54b2b14" />
+
+
 **Step3. Concat**
 
 이제 두 행렬을 이어 붙임:
+
+<img width="696" height="242" alt="image" src="https://github.com/user-attachments/assets/c17fc728-e1f0-4f2f-aebc-47f39f8cd3ae" />
+
 
 즉, 원래 입력 `"I love pizza"` 앞에 두 개의 가짜 토큰(소프트 프롬프트가 붙음)
 
@@ -115,21 +143,40 @@ Question : 그래프의 특정 요소 또는 관계를 탐구하도록 설계
 
 Answer : 답변은 노드 또는 엣지의 속성안에 존재, 이를 추론 하기위해 multi-hop추론이 필요
 
+<img width="1231" height="442" alt="image" src="https://github.com/user-attachments/assets/cf2bf29e-b662-40e3-a38b-7c3ab24ee7bc" />
+
+
 1. **Explanation Graph**
 - 토론에서 입장을 예측하기 위해 expantion graph를 생성하는 데이터셋
 - 주장이 supportive, contradictory인지 평가하는게 주 목적이며, 정확도를 지표로 사용
-1. **Scene Graph**
+
+<img width="1633" height="161" alt="image" src="https://github.com/user-attachments/assets/3b0f2a9c-6a6a-4d28-bed4-e6f486feb560" />
+
+
+2. **Scene Graph**
 - 100,000개의 시각적 질의응답 데이터셋(vqa)
 - a scene graph의 텍스트 설명에 기반해 질문을 하는것. 정확도를 지표로 사용
-1. **Knowledge Grpah**
+
+<img width="1650" height="926" alt="image" src="https://github.com/user-attachments/assets/3ddcd9f4-548c-4ce1-860c-5f8523e59f15" />
+
+3. **Knowledge Grpah**
 - 4.737개의 질문으로 구성된 multi hop 지식 그래프 QA데이터셋
 - 질문에 언급된 entity를 중심으로 2-hop이내에 사실을 답할 수 있도록 구성
 
+<img width="1657" height="531" alt="image" src="https://github.com/user-attachments/assets/769e080d-ee20-4d43-8827-bfea821d9745" />
+
+
 # **G-retriever**
+
+<img width="1334" height="470" alt="image" src="https://github.com/user-attachments/assets/87e86bf7-62c8-480a-9a3f-f841597c87a5" />
+
 
 ## **Step1. Indexing**
 
 1. 노드와 엣지의 텍스트 속성을 LM을 활용하여 임베딩
+
+<img width="291" height="48" alt="image" src="https://github.com/user-attachments/assets/5c2915fe-b8e3-4921-b47a-29b5154082ee" />
+
 
 x_n : 노드의 텍스트 속성 정보
 
@@ -146,6 +193,9 @@ edge_attr: capable of |
 1. Query를 LM으로 임베딩
 2. KNN 방식으로 Query와 관련된 노드를 topk 검색
 3. KNN 방식으로 Query와 관련된 엣지를 topk 검색
+
+<img width="419" height="105" alt="image" src="https://github.com/user-attachments/assets/0d6dbefe-5a5f-4c3b-96c7-a9ea233c790c" />
+
 
 z_n : 노드 속성 임베딩
 
@@ -174,6 +224,9 @@ node, edge임베딩 |
         → Prize-Collecting Steiner Tree(PCST)를 사용
         
     - 아래는 전체 그래프를 넣는 경우와 PCST를 통한 Subgraph를 넣는 경우 비교 결과
+  
+<img width="820" height="179" alt="image" src="https://github.com/user-attachments/assets/691b2232-58c2-45e8-ab89-ad3982a9ebb0" />
+
 
 | **I/O** | **type** | **E.g** |
 | --- | --- | --- |
@@ -195,7 +248,13 @@ GNN인코더에 넣을 수 있는 Data |
 
 아래 방식으로 노드와 엣지의 보상을 할당
 
+<img width="788" height="102" alt="image" src="https://github.com/user-attachments/assets/65fa20e3-85bf-49ce-a677-d814c6b7ac24" />
+
+
 최종적으로 찾고자 하는 Subgraph: S^* = (V^*, E^*)는 아래를 따름
+
+<img width="1088" height="195" alt="image" src="https://github.com/user-attachments/assets/6435948c-f804-4d67-aec0-a7879984c62f" />
+
 
 C_e: 엣지 하나당 사전에 정의된 비용, Subgraph의 크기를 조정하는데 사용
 
@@ -371,15 +430,21 @@ Subgraph S∗=(V∗,E∗)를  Graph Encoder(GNN)을 사용함
 
 이때, GNN으로 mean pooling을 진행
 
+<img width="469" height="54" alt="image" src="https://github.com/user-attachments/assets/36f74321-4d81-47c4-bc09-719d59f501c1" />
+
+
 d_g : GNN Dim
 
-1. **Projection Layer**
+2. **Projection Layer**
 
 MLP로 그래프 토큰을 LLM vector space로 정렬하기 위해 사용
 
+<img width="346" height="62" alt="image" src="https://github.com/user-attachments/assets/9cee14b1-09dd-4ae0-a572-54a252312c17" />
+
+
 d_l: LLM Dim
 
-1. **Text Embedder**
+3. **Text Embedder**
 
 **Step1.** Subgraph textualize
 
@@ -395,6 +460,9 @@ Query x_q와 textualize Subgraph를 합침
 
 frozen LLM의 첫번째 레이어인 text embedding layer을 통해 h_t로 변환
 
+<img width="703" height="58" alt="image" src="https://github.com/user-attachments/assets/b1f5676d-5f09-4aa2-87b3-c5eea332d73e" />
+
+
 L : 토큰의 수
 
 ; : concat
@@ -407,7 +475,13 @@ Softprompt 역할하는 그래프 토큰 h_g^hat과 h_t를 concat
 
 Graph Encoder phi_1 와 Projection Layer phi_2의 파라미터는 역전파를 통해 최적화할 수 있도록 함
 
+<img width="696" height="108" alt="image" src="https://github.com/user-attachments/assets/4dea58f4-3c74-4113-bad4-7c75d72421d8" />
+
+
 ## **Inference Flow**
+
+<img width="2057" height="913" alt="image" src="https://github.com/user-attachments/assets/d529ab2a-0af9-42be-99c8-2f3d94b5f5ab" />
+
 
 SoftPrompting 과정(파란색)
 
@@ -430,9 +504,23 @@ LLM 응답 과정(검정)
 
 ## **성능 비교**
 
+<img width="896" height="357" alt="image" src="https://github.com/user-attachments/assets/a51bc87e-3cc9-4346-8b56-d33a5c581427" />
+
+
 - **Inference-only:** frozen된 LLM을 사용하여 직접 질의응답을 수행하는 방식
+
+<img width="762" height="333" alt="image" src="https://github.com/user-attachments/assets/3ff1544d-22dd-4889-bb38-494093b344ab" />
+
+
 - **Frozen LLM w/ Prompt Tuning (PT):** LLM의 파라미터는 고정한 채, 프롬프트만 조정하는 방식
+
+<img width="1297" height="327" alt="image" src="https://github.com/user-attachments/assets/2df09ff0-7514-4355-a69e-5d3541a2bba1" />
+
+
 - **Tuned LLM:** LoRA 를 이용해 LLM 자체를 fine-tuning하는 방식
+
+<img width="1313" height="334" alt="image" src="https://github.com/user-attachments/assets/eee5f606-fc43-44e6-b935-4bea9f43ef3b" />
+
 
 최고 성능은 Bold, 두번 째 성은 밑줄로 표시
 
@@ -443,6 +531,9 @@ LLM 응답 과정(검정)
     오히려 LLM이 더 나은 성능을 보이기도 하는데,
     
     그래프 지식이 오히려 복잡성이나 잡음(noise) 을 유발했기 때문으로 보임
+
+<img width="458" height="178" alt="image" src="https://github.com/user-attachments/assets/ddd84218-89be-4437-b313-17fa9bb4d65e" />
+
     
 
 | 방식 | 핵심 아이디어 | 프롬프트 예시 | 특징 / 목적 |
@@ -465,6 +556,11 @@ LLM 응답 과정(검정)
     
 
 ## **Ablation study**
+
+<img width="2195" height="505" alt="image" src="https://github.com/user-attachments/assets/7ca575c9-0307-4f0f-b895-96ad2fdd1843" />
+
+<img width="535" height="218" alt="image" src="https://github.com/user-attachments/assets/cda83c56-e68c-4930-839b-56bf9aa3491e" />
+
 
 어떤 요소를 제거하든 성능 저하가 발생
 
@@ -591,4 +687,9 @@ GraphDB에 적용해서 사용한다면, PCST알고리즘과 어떻게 연결 �
 
 GNN에 따라 robust 다름, PyG 모듈에서 지원하기에 바꿔서 해보면 될듯
 
-1. LLM 모델 변경
+<img width="581" height="174" alt="image" src="https://github.com/user-attachments/assets/bc475a95-acb0-4f0a-a039-72fafdba560e" />
+
+
+2. LLM 모델 변경
+
+<img width="443" height="117" alt="image" src="https://github.com/user-attachments/assets/1c34eeb0-249e-4f2d-8078-1f1f7a7ac8f1" />
