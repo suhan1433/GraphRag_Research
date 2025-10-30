@@ -384,15 +384,6 @@ excute_query에서 DB안의 정보들을 메시지로 출력
 
 효율(성능+시간)이 가장 좋은 Naive Text2Cypher With Retry and Evaluation Flow을 활용
 
-이 agnet를 사용하기 위해 선행 되어야 하는 것
-
-1. 스키마 구축
-2. 데이터 구축
-3. 필요하다면 template를 수정해야함
-4. 사용하는 GraphDB에 맞게 명령어들 수정
-5. few-shot을 위한 질문과 cypher을 만들 필요 있음
-    
-    (최종답변에서 생성된 Cypher가 자동 저장 되므로, 여러번 다양한 질문으로 실행 시키면 됨)
     
 
 result
