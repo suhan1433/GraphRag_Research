@@ -611,6 +611,11 @@ temperature = 1  # 창의적 출력 (다양한 최적화 시도)
 
 ---
 
+# Reference
+
+[Architectural Patterns for Text-to-SQL: Leveraging LLMs for Enhanced BigQuery Interactions
+](https://medium.com/google-cloud/architectural-patterns-for-text-to-sql-leveraging-llms-for-enhanced-bigquery-interactions-59756a749e15)
+
 논의 필요 내용
 
 1. Flow에 어떤 기능들을 추가할지
