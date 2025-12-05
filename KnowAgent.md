@@ -122,7 +122,7 @@ H_t = (T_0, A_0, O_0, T_1, ..., T_{t-1}, A_{t-1}, O_{t-1})
 
 # **3. KnowAgent**
 
-<img width="1080" height="608" alt="image" src="https://github.com/user-attachments/assets/30800161-bc22-403c-8045-5348a1f2a7fb" />
+<img width="728" height="361" alt="image" src="https://github.com/user-attachments/assets/5aa19d00-7ccf-4c41-988c-f9607b983323" />
 
 
 Action Knowledge를 정의한 후, 이 지식을 활용해 플래닝 경로를 생성하고,
