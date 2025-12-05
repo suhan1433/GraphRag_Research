@@ -1,18 +1,18 @@
 - 1. Overview
 - 2. Agent Methodology
     - 2.1 Construction
-    - 2.1.1 Profile Definition
-2.1.2 Memory Mechanism
-2.1.3 Planning Capability
-2.1.4 Action Excution
-2.2 Agent Collaboration
-2.2.1 Centralized Control
-2.2.2 Decentralized Collaboration
-2.2.3 Hybrid Architecture
-2.3 Agent Evolution
-2.3.1 Autonomous optimization and self-learning
-2.3.2 Multi-Agent Co-Evolution
-2.3.3 Evolution via External Resources
+        - 2.1.1 Profile Definition
+        - 2.1.2 Memory Mechanism
+        - 2.1.3 Planning Capability
+        - 2.1.4 Action Excution
+    - 2.2 Agent Collaboration
+        - 2.2.1 Centralized Control
+        - 2.2.2 Decentralized Collaboration
+        - 2.2.3 Hybrid Architecture
+    - 2.3 Agent Evolution
+        - 2.3.1 Autonomous optimization and self-learning
+        - 2.3.2 Multi-Agent Co-Evolution
+        - 2.3.3 Evolution via External Resources
 ---
 
 Awsome-Agent-Paper의 Agent Methodolgy 개념을 소개하고자 작성 했습니다.
@@ -26,6 +26,9 @@ Survey논문자체가 개념들을 추상적으로 작성되어 있어, 이런�
 이 링크로 [github](https://github.com/luo-junyu/Awesome-Agent-Papers) , [paper](https://arxiv.org/pdf/2503.21460)를 확인 가능합니다.
 
 # **1. Overview**
+
+<img width="1870" height="879" alt="image" src="https://github.com/user-attachments/assets/d1c225c9-adbe-4a03-a3cf-09a008b1a55c" />
+
 
 1. **Agent Methodology**(Agent 방법론)는 구성, 협업, 진화의 기초적 측면을 다루며
 2. **Evaluation and Tools**(평가 및 도구)는 벤치마크, 평가 프레임워크, 개발 도구를 제시하고
@@ -43,6 +46,9 @@ Construction(2.1)에서는 Profile Definition, Memory Mechanism, Planning Capabi
 Collaboration(2.2)에서는 다수의 Agent의 Centralized Control, Decentralized Collaboration, Hybrid Achitecture 방법을 다룬다.
 
 Evolution(2.3)에서는 Autonomous Optimization and Self-Learning, Multi-Agent-Co-Evolution, Evolution via Extenal Resources를 통해 시간에 따라 Agent 성능을 향상 시킨 방법을 다룬다.
+
+<img width="871" height="981" alt="image" src="https://github.com/user-attachments/assets/b2d6289e-001f-4010-a2f7-4d12088a5a7a" />
+
 
 ## **2.1 Construction**
 
