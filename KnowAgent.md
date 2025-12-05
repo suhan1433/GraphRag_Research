@@ -1,11 +1,11 @@
-- [0. Abstract]
-- [1. Introduction]
-- [2. Background]
-- [3. KnowAgent]
-    - [3.1 Definition of Action Knowledge]
-    - [3.2 Action Knowledge를 활용한 Planning Path 생성]
-    - [3.3 지식 기반 자기학습을 통한 Planning Path 정제]
-- [Prompt Format]
+- 0. Abstract
+- 1. Introduction
+- 2. Background
+- 3. KnowAgent
+    - 3.1 Definition of Action Knowledge
+    - 3.2 Action Knowledge를 활용한 Planning Path 생성
+    - 3.3 지식 기반 자기학습을 통한 Planning Path 정제
+- Prompt Format
 
 # **0. Abstract**
 
@@ -63,6 +63,9 @@ KnowAgent 제안:
 
 이를통해 synthetic trajectories를 개선하고, Planning 환각을 해결을 목표로 함
 
+<img width="599" height="533" alt="image" src="https://github.com/user-attachments/assets/81702658-573f-4ef2-85ee-33dee13d0da9" />
+
+
 Figure1:
 
 step1: action planning knowledge을 통합한 광범위한 `action knowledge base`를 구축
@@ -103,15 +106,24 @@ H_t = (T_0, A_0, O_0, T_1, ..., T_{t-1}, A_{t-1}, O_{t-1})
 
 에이전트는 이전 히스토리 Ht를 바탕으로 다음 내적 사고 Tt를 생성.
 
+<img width="526" height="176" alt="image" src="https://github.com/user-attachments/assets/a64a82b3-d942-4ef2-9ab1-da0cdc9bd84b" />
+
+
 1. Action(At) 생성
 
 생성된 Tt와 히스토리 Ht를 기반으로 행동 At 결정
+
+<img width="554" height="145" alt="image" src="https://github.com/user-attachments/assets/3216016d-0fe5-42d5-942a-f4cc61388702" />
+
 
 1. Observation(Ot) 기록
 - At의 실행 결과를 Ot로 처리하고 trajectory에 추가
 - 새로운 히스토리 Ht+1 생성
 
 # **3. KnowAgent**
+
+<img width="1080" height="608" alt="image" src="https://github.com/user-attachments/assets/30800161-bc22-403c-8045-5348a1f2a7fb" />
+
 
 Action Knowledge를 정의한 후, 이 지식을 활용해 플래닝 경로를 생성하고,
 
@@ -181,6 +193,8 @@ knowledgeable Self-Learning 메커님을 통해 지속적으로 정제하여 프
 
 1. 정제된 행동 목록과 제약 사항을 다시 LLM에게 제공
 2. LLM이 최종 행동 규칙 세트 생성
+
+<img width="1245" height="417" alt="image" src="https://github.com/user-attachments/assets/f8f16448-d7a4-46a0-9687-9096eda18025" />
 
 Action Knowledge는 Iteration이 많아질 수록 더 효과가 커짐
 
@@ -262,7 +276,12 @@ H_t = (P_0, T_0, A_0, O_0, …, T_{t-1}, A_{t-1}, O_{t-1})
 
 파라미터 θ를 가진 확률적 언어 에이전트 π에서, 다음 경로 Pₜ의 생성은 다음과 같이 표현됨:
 
+<img width="303" height="85" alt="image" src="https://github.com/user-attachments/assets/5ec808f3-acdd-4714-9c5b-9a63a605346f" />
+
 Thought 및 Action 생성
+
+<img width="621" height="322" alt="image" src="https://github.com/user-attachments/assets/6f6524f1-1328-45dc-b6e2-201e167cabd2" />
+
 
 ## **3.3 지식 기반 자기학습을 통한 Planning Path 정제**
 
@@ -293,10 +312,19 @@ Filtiering과 Merging을 통해 trajectory 품질을 향상 시킴
 - 더 효율적인 **trajectory(더 짧은 path) 를 우선적으로 남긴다**
 - 이를 통해 최적의 문제 해결 효율성을 보장한다
 
+<img width="611" height="746" alt="image" src="https://github.com/user-attachments/assets/f9503827-b40e-447d-a74d-1ae9fd0781c1" />
+
+
 # **Prompt Format**
 
 path를 생성하기 위해 만든 프롬프트
 
+<img width="1127" height="791" alt="image" src="https://github.com/user-attachments/assets/8a0ad813-a00c-41de-8f66-660384339a52" />
+
+
 e.g. Hotpot QA
+
+<img width="909" height="1043" alt="image" src="https://github.com/user-attachments/assets/551f76b2-8208-4135-92dc-d7c542af7cae" />
+
 
 https://arxiv.org/pdf/2403.03101
