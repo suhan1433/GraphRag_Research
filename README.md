@@ -7,3 +7,4 @@ method, paper research for GraphRag
 | Text2Cypher Agent | [Agent method](https://github.com/suhan1433/GraphRag_Research/blob/main/text2cypher.md) |
 | Text2SQL Arcitectural patterns | [Patterns](https://github.com/suhan1433/GraphRag_Research/blob/main/Text2SQL_Architectural%20Patterns%20.md) |
 | KnowAgent | [Review](https://github.com/suhan1433/GraphRag_Research/blob/main/KnowAgent.md) |
+| AgentMethodology | [Review](https://github.com/suhan1433/GraphRag_Research/blob/main/Agent%20Methodolgy.md) |
